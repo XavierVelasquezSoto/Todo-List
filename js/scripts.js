@@ -2,23 +2,31 @@ const inputTodoListElement = document.getElementById("input-todo-list");
 
 const wordListElement = document.getElementById("word-list");
 
-const newList = (list) => {
+const tasks = [
+  {
+    id: Date.now(),
+    name: "Comprar el pan",
+    completed: false,
+  },
+];
+
+const newList = (tasks) => {
   wordListElement.textContent = "";
 
   fragment = document.createDocumentFragment();
 
-  list.forEach((list) => {
+  tasks.forEach((task) => {
     const newListDiv = document.createElement("div");
     newListDiv.classList.add("test-checkbox");
 
     const newListInput = document.createElement("input");
     newListInput.classList.add("container-checkbox");
     newListInput.type = "checkbox";
-    newListInput.id = "list-word";
+    newListInput.id = task.id;
 
     const newListLabel = document.createElement("label");
     newListLabel.classList.add("test-label");
-    newListLabel.textContent = "ok";
+    newListLabel.textContent = task.name;
     newListLabel.for = "list-word";
 
     const newListImg = document.createElement("img");
@@ -26,15 +34,16 @@ const newList = (list) => {
     newListImg.classList.add("cancel-list");
 
     newListDiv.append(newListInput, newListLabel, newListImg);
-    fragment(newListDiv);
+    fragment.append(newListDiv);
   });
   wordListElement.append(fragment);
 };
+newList(tasks);
 
 const inputList = (event) => {
   wordList = event.target.value;
   console.log(wordList);
-  newList(list);
+  newList(tasks);
 };
 
 inputTodoListElement.addEventListener("input", inputList);
