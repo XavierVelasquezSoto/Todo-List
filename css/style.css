@@ -153,9 +153,6 @@ body {
 
 /* div vacio */
 
-.test-box {
-}
-
 .container-checkbox {
   display: flex;
   align-items: center;
@@ -172,7 +169,10 @@ body {
 }
 
 .test-checkbox:checked + .test-label::before {
+  border: none;
   background: radial-gradient(circle at 30% 30%, #55ddff 0%, #c058f3 100%);
+  width: 24px;
+  height: 24px;
 }
 
 .test-checkbox:checked + .test-label::after {
@@ -184,7 +184,7 @@ body {
   width: 10px;
   height: 10px;
   left: -3px;
-  top: 3px;
+  top: 2px;
 }
 
 .test-label {
