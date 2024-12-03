@@ -3,8 +3,54 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Josefin+Sans:ital,wght@0,100..700;1,100..700&display=swap"
+      rel="stylesheet"
+    />
     <link rel="stylesheet" href="css/style.css" />
     <title>Document</title>
   </head>
-  <body></body>
+  <body>
+    <header class="header">
+      <div class="container-header">
+        <h1 class="title">TODO</h1>
+        <img class="img" src="./assets/img/icon-sun.svg" alt="" />
+      </div>
+    </header>
+    <main class="main">
+      <form id="form" class="form">
+        <input
+          class="input-todo-list"
+          type="text"
+          id="todo-list"
+          placeholder="Create a new todo…"
+        />
+        <label for="todo-list" class="label-todo-list"></label>
+      </form>
+      <div class="test-box">
+        <div class="container-checkbox">
+          <input id="test-id" type="checkbox" class="test-checkbox" />
+          <label for="test-id" class="test-label">test text</label>
+          <img
+            src="./assets/img/icon-cross.svg"
+            alt="cross"
+            class="cancel-list"
+          />
+        </div>
+      </div>
+      <div class="container">
+        <span class="accepted-list">No tasks</span>
+        <span class="accepted-list">Clear Completed</span>
+      </div>
+      <div class="container-button">
+        <button class="button button-select">All</button>
+        <button class="button">Active</button>
+        <button class="button">Completed</button>
+      </div>
+      <span class="footer">Drag and drop to reorder list</span>
+    </main>
+    <script src="./js/scripts.js"></script>
+  </body>
 </html>
