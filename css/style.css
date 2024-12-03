@@ -29,18 +29,49 @@ body {
   background-color: var(--background-body);
 }
 
+body.dark {
+  --background-body: #ffffff;
+  --color-dark-purple: #25273d;
+}
+
+body.dark .header {
+  background-image: url(../assets/img/bg-mobile-light.jpg);
+}
+
+body.dark .input-todo-list {
+  --color-dark-purple: #ffffff;
+  border: 1px solid #e3e4f1;
+}
+
+body.dark .container {
+  --color-dark-purple: #ffffff;
+  border: 1px solid #e3e4f1;
+  box-shadow: 0 10px 20px 0px #e3e4f1;
+}
+body.dark .container-button {
+  --color-dark-purple: #ffffff;
+  border: 1px solid #e3e4f1;
+  box-shadow: 0 10px 20px 0px #e3e4f1;
+}
+
+body.dark .container-checkbox {
+  --color-dark-purple: #ffffff;
+  border: 1px solid #e3e4f1;
+  box-shadow: 0 10px 20px 0px #e3e4f1;
+}
+
 :root {
   --background-body: #171823;
   --color-dark-purple: #25273d;
   --color-grey: #5b5e7e;
+  --title-color: #ffffff;
+  --color-select: #3a7cfd;
+  --spacing-m: -0.19px;
   --font-regular: 400;
   --font-bold: 700;
   --font-s: 12px;
   --font-m: 14px;
   --spacing-s: -0.17px;
-  --spacing-m: -0.19px;
-  --title-color: #ffffff;
-  --color-select: #3a7cfd;
 }
 
 .header {
@@ -82,12 +113,12 @@ body {
 .label-todo-list::before {
   content: "";
   position: absolute;
-  border: 2px solid var(--color-grey);
+  border: 1px solid var(--color-grey);
   border-radius: 50px;
   width: 20px;
   height: 20px;
   top: -3px;
-  right: 315px;
+  right: 310px;
 }
 
 .input-todo-list {
@@ -97,7 +128,7 @@ body {
   height: 51px;
   width: 327px;
   border-radius: 5px;
-  margin: 0 24px 16px;
+  margin: 0 18px 16px;
   padding-left: 52px;
   bottom: 86px;
   outline: none;
@@ -196,7 +227,7 @@ body {
 .test-label::before {
   content: "";
   position: absolute;
-  border: 2px solid var(--color-grey);
+  border: 1px solid var(--color-grey);
   width: 20px;
   height: 20px;
   border-radius: 20px;
