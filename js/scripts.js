@@ -1,3 +1,5 @@
+const formElement = document.getElementById("form");
+
 const inputTodoListElement = document.getElementById("input-todo-list");
 
 const wordListElement = document.getElementById("word-list");
@@ -11,8 +13,6 @@ const tasks = [
 ];
 
 const newList = (tasks) => {
-  wordListElement.textContent = "";
-
   fragment = document.createDocumentFragment();
 
   tasks.forEach((task) => {
@@ -26,8 +26,8 @@ const newList = (tasks) => {
 
     const newListLabel = document.createElement("label");
     newListLabel.classList.add("test-label");
-    newListLabel.textContent = task.name;
-    newListLabel.for = "list-word";
+    newListLabel.htmlFor = task.id;
+    newListInput.textContent = task.name;
 
     const newListImg = document.createElement("img");
     newListImg.src = "./assets/img/icon-cross.svg";
@@ -38,15 +38,19 @@ const newList = (tasks) => {
   });
   wordListElement.append(fragment);
 };
-newList(tasks);
 
-const inputList = (event) => {
-  wordList = event.target.value;
+const formList = (event) => {
+  event.preventDefault();
+
+  const wordList = inputTodoListElement.value;
+
   console.log(wordList);
+
+  inputTodoListElement.value = "";
   newList(tasks);
 };
 
-inputTodoListElement.addEventListener("input", inputList);
+formElement.addEventListener("submit", formList);
 
 //  <div class="container-checkbox">
 //       <input id="list-word" type="checkbox" class="test-checkbox" />
