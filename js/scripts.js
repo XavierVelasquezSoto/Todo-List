@@ -16,8 +16,26 @@ const taskCleanElement = document.getElementById("task-clean"); //limpia tareas
 
 //
 
+const buttonFiltersElement = document.getElementById("button-filters");
+
 let tasks = [];
 let taskCounter = 0;
+
+// button filters
+
+const filterSelection = (event) => {
+  event.target.dataset.filter;
+  // console.log(event.target.dataset.filter);
+
+  if (!event.target.dataset.filter) {
+    return;
+  }
+
+  for (const button of buttonFiltersElement.children) {
+    button.classList.remove("button-select");
+  }
+  event.target.classList.add("button-select");
+};
 
 //limpiar todas las tareas
 
@@ -135,6 +153,8 @@ taskCounterElement.addEventListener("change", tasksCounter);
 taskCleanElement.addEventListener("click", tasksClean);
 
 imgElement.addEventListener("click", switchTheme);
+
+buttonFiltersElement.addEventListener("click", filterSelection);
 
 // <!-- <div class="container-checkbox">
 //           <input id="list-word" type="checkbox" class="test-checkbox" />

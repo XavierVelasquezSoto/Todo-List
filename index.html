@@ -29,8 +29,25 @@
         />
         <label for="input-todo-list" class="label-todo-list"></label>
       </form>
-      <div id="word-list">
-        <!-- <div class="container-checkbox">
+      <div id="word-list"></div>
+      <div class="container">
+        <span id="task-counter" class="accepted-list">No tasks</span>
+        <span id="task-clean" class="accepted-list">Clear Completed</span>
+      </div>
+      <div id="button-filters" class="container-button">
+        <button data-filter="button-all" class="button button-select">
+          All
+        </button>
+        <button data-filter="button-active" class="button">Active</button>
+        <button data-filter="button-completed" class="button">Completed</button>
+      </div>
+      <span class="footer">Drag and drop to reorder list</span>
+    </main>
+    <script src="./js/scripts.js"></script>
+  </body>
+</html>
+
+<!-- <div class="container-checkbox">
           <input id="list-word" type="checkbox" class="test-checkbox" />
           <label for="list-word" class="test-label">test text</label>
           <img
@@ -39,18 +56,3 @@
             class="cancel-list"
           />
         </div> -->
-      </div>
-      <div class="container">
-        <span id="task-counter" class="accepted-list">No tasks</span>
-        <span id="task-clean" class="accepted-list">Clear Completed</span>
-      </div>
-      <div class="container-button">
-        <button class="button button-select">All</button>
-        <button class="button">Active</button>
-        <button class="button">Completed</button>
-      </div>
-      <span class="footer">Drag and drop to reorder list</span>
-    </main>
-    <script src="./js/scripts.js"></script>
-  </body>
-</html>
