@@ -1,24 +1,37 @@
-const formElement = document.getElementById("form");
-const imgElement = document.getElementById("img"); //switch theme
-const inputTodoListElement = document.getElementById("input-todo-list"); //input
+const formElement = document.getElementById('form');
+const imgElement = document.getElementById('img'); //switch theme
+const inputTodoListElement = document.getElementById('input-todo-list'); //input
 
 //div vacio check
-const wordListElement = document.getElementById("word-list");
+const wordListElement = document.getElementById('word-list');
 //
 
-const taskCounterElement = document.getElementById("task-counter"); // contador tareas
-const taskCleanElement = document.getElementById("task-clean"); //limpia tareas
+const taskCounterElement = document.getElementById('task-counter'); // contador tareas
+const taskCleanElement = document.getElementById('task-clean'); //limpia tareas
 
 //
 
-const buttonFiltersElement = document.getElementById("button-filters");
+const buttonFiltersElement = document.getElementById('button-filters');
 
 let tasks = [];
-let taskCounter = 0;
+
+//button filters task
+
+const filterTaskButton = event => {
+  const filter = event.target.dataset.filter;
+  let filteredTasks = tasks;
+
+  if (filter === 'active') {
+    filteredTasks = tasks.filter(task => !task.completed);
+  } else if (filter === 'completed') {
+    filteredTasks = tasks.filter(task => task.completed);
+  }
+  printAllTasks(filteredTasks);
+};
 
 // button filters
 
-const filterSelection = (event) => {
+const filterSelection = event => {
   event.target.dataset.filter;
   // console.log(event.target.dataset.filter);
 
@@ -27,141 +40,137 @@ const filterSelection = (event) => {
   }
 
   for (const button of buttonFiltersElement.children) {
-    button.classList.remove("button-select");
+    button.classList.remove('button-select');
   }
-  event.target.classList.add("button-select");
+  event.target.classList.add('button-select');
+  filterTaskButton(event);
 };
 
 //limpiar todas las tareas
 
 const tasksClean = () => {
-  tasks = tasks.filter((task) => !task.completed);
+  tasks = tasks.filter(task => !task.completed);
   // console.log(tasks);
   printAllTasks(tasks);
-  tasksCounter();
 };
 
 //contador de tareas
 
-const tasksCounter = (reviewChecked) => {
-  if (reviewChecked) {
-    taskCounter++;
-  } else {
-    taskCounter--;
-  }
+const tasksCounter = () => {
+  const reviewChecked = tasks.filter(task => !task.completed);
+  // console.log(reviewChecked);
 
-  if (taskCounter === 0) {
+  if (reviewChecked.length === 0) {
     taskCounterElement.textContent = `No tasks`;
   } else {
-    taskCounterElement.textContent = `${taskCounter} item left`;
+    taskCounterElement.textContent = `${reviewChecked.length} items left`;
   }
 
-  if (!reviewChecked) return;
+  // if (!reviewChecked) return;
 };
 
 //verifica tareas
 
-const checkPrint = (event) => {
-  // const checkId = event.target.id;
-  const reviewChecked = event.target.checked;
-
-  if (event.target.classList.contains("test-checkbox")) {
-    // console.log(checkId, reviewChecked);
-    tasksCounter(reviewChecked);
-
-    tasks.forEach((task) => {
-      if (task.id === Number(event.target.id)) {
-        task.completed = reviewChecked;
-      }
-    });
-    console.log(taskCounter);
+const checkPrint = event => {
+  const id = event.target.dataset.id;
+  const taskToUpdate = tasks.find(task => String(task.id) === id);
+  // console.log(taskToUpdate);
+  if (taskToUpdate.completed) {
+    taskToUpdate.completed = false;
+  } else {
+    taskToUpdate.completed = true;
   }
+  printAllTasks(tasks);
 };
 
 //limpia tareas
 
-const removePrint = (event) => {
-  if (event.target.classList.contains("cancel-list")) {
+const removePrint = event => {
+  if (event.target.classList.contains('cancel-list')) {
     const removeTasks = event.target.previousElementSibling.htmlFor;
     // console.log(removeTasks);
-    tasks = tasks.filter((task) => task.id != removeTasks);
+    tasks = tasks.filter(task => task.id != removeTasks);
     printAllTasks(tasks);
+    tasksClean(tasks);
+    // console.log(tasks);
   }
-  checkPrint(event);
 };
 
 //tema oscuro/claro
 
 const switchTheme = () => {
-  if (document.body.classList.contains("dark")) {
-    document.body.classList.remove("dark");
-    imgElement.src = "./assets/img/icon-sun.svg";
+  if (document.body.classList.contains('dark')) {
+    document.body.classList.remove('dark');
+    imgElement.src = './assets/img/icon-sun.svg';
   } else {
-    document.body.classList.add("dark");
-    imgElement.src = "./assets/img/icon-moon.svg";
+    document.body.classList.add('dark');
+    imgElement.src = './assets/img/icon-moon.svg';
   }
 };
 
 //imprime tareas
 
-const printAllTasks = (tasks) => {
-  wordListElement.textContent = "";
+const printAllTasks = tasks => {
+  wordListElement.textContent = '';
   fragment = document.createDocumentFragment();
 
-  tasks.forEach((task) => {
-    const newListDiv = document.createElement("div");
-    newListDiv.classList.add("container-checkbox");
+  tasks.forEach(task => {
+    const newListDiv = document.createElement('div');
+    newListDiv.classList.add('container-checkbox');
 
-    const newListInput = document.createElement("input");
-    newListInput.classList.add("test-checkbox");
-    newListInput.type = "checkbox";
+    const newListInput = document.createElement('input');
+    newListInput.classList.add('test-checkbox');
+    newListInput.type = 'checkbox';
+    newListInput.checked = task.completed;
     newListInput.id = task.id;
+    newListInput.dataset.id = task.id;
+    newListInput.addEventListener('change', checkPrint);
 
-    const newListLabel = document.createElement("label");
-    newListLabel.classList.add("test-label");
+    const newListLabel = document.createElement('label');
+    newListLabel.classList.add('test-label');
+    newListLabel.dataset.id = task.id;
     newListLabel.htmlFor = task.id;
     newListLabel.textContent = task.name;
 
-    const newListImg = document.createElement("img");
-    newListImg.src = "./assets/img/icon-cross.svg";
-    newListImg.classList.add("cancel-list");
+    const newListImg = document.createElement('img');
+    newListImg.src = './assets/img/icon-cross.svg';
+    newListImg.classList.add('cancel-list');
+    newListImg.addEventListener('click', removePrint);
 
     newListDiv.append(newListInput, newListLabel, newListImg);
     fragment.append(newListDiv);
   });
   wordListElement.append(fragment);
+  tasksCounter();
 };
 
 //formulario que recibe y crea tarea de printAlltasks
 
-const formList = (event) => {
+const formList = event => {
   event.preventDefault(); //previene recargar web
 
   const wordList = inputTodoListElement.value;
+  if (!wordList) return;
 
   // console.log(wordList);
 
   tasks.push({
     id: Date.now(),
     name: wordList,
-    completed: false,
+    completed: false
   });
 
-  inputTodoListElement.value = "";
+  inputTodoListElement.value = '';
   printAllTasks(tasks);
 };
 
-formElement.addEventListener("submit", formList);
+formElement.addEventListener('submit', formList);
 
-wordListElement.addEventListener("click", removePrint);
+taskCleanElement.addEventListener('click', tasksClean);
 
-taskCounterElement.addEventListener("change", tasksCounter);
+imgElement.addEventListener('click', switchTheme);
 
-taskCleanElement.addEventListener("click", tasksClean);
-
-imgElement.addEventListener("click", switchTheme);
-
-buttonFiltersElement.addEventListener("click", filterSelection);
+buttonFiltersElement.addEventListener('click', filterSelection);
 
 // <!-- <div class="container-checkbox">
 //           <input id="list-word" type="checkbox" class="test-checkbox" />
