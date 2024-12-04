@@ -1,17 +1,12 @@
 const formElement = document.getElementById("form");
-
 const imgElement = document.getElementById("img"); //switch theme
-
 const inputTodoListElement = document.getElementById("input-todo-list"); //input
 
 //div vacio check
-
 const wordListElement = document.getElementById("word-list");
-
 //
 
 const taskCounterElement = document.getElementById("task-counter"); // contador tareas
-
 const taskCleanElement = document.getElementById("task-clean"); //limpia tareas
 
 //
@@ -40,7 +35,10 @@ const filterSelection = (event) => {
 //limpiar todas las tareas
 
 const tasksClean = () => {
+  tasks = tasks.filter((task) => !task.completed);
+  // console.log(tasks);
   printAllTasks(tasks);
+  tasksCounter();
 };
 
 //contador de tareas
@@ -57,18 +55,27 @@ const tasksCounter = (reviewChecked) => {
   } else {
     taskCounterElement.textContent = `${taskCounter} item left`;
   }
+
+  if (!reviewChecked) return;
 };
 
 //verifica tareas
 
 const checkPrint = (event) => {
   // const checkId = event.target.id;
+  const reviewChecked = event.target.checked;
+
   if (event.target.classList.contains("test-checkbox")) {
     // console.log(checkId, reviewChecked);
-    const reviewChecked = event.target.checked;
     tasksCounter(reviewChecked);
+
+    tasks.forEach((task) => {
+      if (task.id === Number(event.target.id)) {
+        task.completed = reviewChecked;
+      }
+    });
+    console.log(taskCounter);
   }
-  // return checkId, reviewChecked
 };
 
 //limpia tareas
@@ -132,7 +139,7 @@ const formList = (event) => {
 
   const wordList = inputTodoListElement.value;
 
-  console.log(wordList);
+  // console.log(wordList);
 
   tasks.push({
     id: Date.now(),
