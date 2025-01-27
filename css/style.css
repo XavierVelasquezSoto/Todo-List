@@ -25,7 +25,7 @@ ul {
 
 body {
   margin: 0;
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: "Josefin Sans", sans-serif;
   background-color: var(--background-body);
 }
 
@@ -35,7 +35,7 @@ body.dark {
 }
 
 body.dark .header {
-  background-image: url(../assets/img/bg-mobile-light.jpg);
+  background-image: url(../assets/img/bg-desktop-light.jpg);
 }
 
 body.dark .input-todo-list {
@@ -76,7 +76,17 @@ body.dark .container-checkbox {
 
 .header {
   background-image: url(../assets/img/bg-mobile-dark.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
   height: 200px;
+}
+
+@media screen and (width>768px) {
+  .header {
+    background-image: url(../assets/img/bg-desktop-dark.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
 }
 
 .container-header {
@@ -102,6 +112,12 @@ body.dark .container-checkbox {
   top: 122px;
 }
 
+@media screen and (width>768px) {
+  .main {
+    margin-left: 35%;
+  }
+}
+
 /* .form {} */
 
 .label-todo-list {
@@ -111,7 +127,7 @@ body.dark .container-checkbox {
   color: var(--color-grey);
 }
 .label-todo-list::before {
-  content: '';
+  content: "";
   position: absolute;
   border: 1px solid var(--color-grey);
   border-radius: 50px;
@@ -207,7 +223,7 @@ body.dark .container-checkbox {
 }
 
 .test-checkbox:checked + .test-label::after {
-  content: '';
+  content: "";
   position: absolute;
   background-image: url(../assets/img/icon-check.svg);
   background-size: contain;
@@ -229,7 +245,7 @@ body.dark .container-checkbox {
 }
 
 .test-label::before {
-  content: '';
+  content: "";
   position: absolute;
   border: 1px solid var(--color-grey);
   width: 20px;
